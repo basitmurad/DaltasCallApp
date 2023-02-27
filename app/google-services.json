@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "523945854112",
+    "project_id": "daltas-call-app-f2b61",
+    "storage_bucket": "daltas-call-app-f2b61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523945854112:android:db73a6b085677605c7f5c5",
+        "android_client_info": {
+          "package_name": "com.example.daltascallapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523945854112-iq0qtlpr0n1onj2f0jo24igt2nnlu4j7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.daltascallapp",
+            "certificate_hash": "b12cb318de16c99f245f32da5abd3031df7038c1"
+          }
+        },
+        {
+          "client_id": "523945854112-b3sjj006dment2otc7rkaluhbnnspv54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClQs0xfmMZ-Wx9ZTBoRyggiFVlpTlcn8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523945854112-b3sjj006dment2otc7rkaluhbnnspv54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
