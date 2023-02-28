@@ -33,6 +33,10 @@ public class FacebookLoginActivity extends LoginActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+
+
+
         callbackManager = CallbackManager.Factory.create();
 //        LoginButton.setReadPermissions("email", "public_profile");
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
