@@ -1,24 +1,32 @@
 package com.example.daltascallapp.UserModels;
 
 public class UserClass {
-    private String uniqeID,name,profile,city;
+    private String name,profile,city,uniqueID;
 
     public UserClass() {
     }
 
-    public UserClass(String uniqeID, String name, String profile, String city) {
-        this.uniqeID = uniqeID;
+    public UserClass(String name, String profile, String city, String uniqueID) {
         this.name = name;
         this.profile = profile;
         this.city = city;
+        this.uniqueID = uniqueID;
     }
 
-    public String getUniqeID() {
-        return uniqeID;
+    public UserClass(String name, String city, String uniqueID) {
+        this.name = name;
+
+        this.city = city;
+        this.uniqueID = uniqueID;
     }
 
-    public void setUniqeID(String uniqeID) {
-        this.uniqeID = uniqeID;
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     public String getName() {

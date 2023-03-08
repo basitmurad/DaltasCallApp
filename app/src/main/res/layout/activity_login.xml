@@ -1,111 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/backg"
-    android:orientation="horizontal"
+android:background="@drawable/back_dashbooard"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
 
-    <!--    <ImageView-->
+<!--    <com.facebook.login.widget.LoginButton-->
+<!--        android:id="@+id/login_button"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/google"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginBottom="30dp" />-->
 
-<!--        />-->
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/asset"
+        android:textAlignment="center"
+
+        android:fontFamily="@font/b612"
         android:letterSpacing=".1"
         android:text="Daltas"
-        android:textAlignment="center"
+
+        android:layout_marginBottom="60dp"
         android:textColor="#E0DDE0"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/btn_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="552dp"
 
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/back_btn"
-
-        android:backgroundTint="#B12FC7"
-
-        android:drawablePadding="8dp"
+android:id="@+id/btn_google"
+       android:layout_margin="15dp"
+        android:background="@drawable/back_google"
+        android:drawableLeft="@drawable/google"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
-        android:letterSpacing=".1"
 
-        android:paddingStart="20dp"
-
-        android:paddingTop="6dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="6dp"
-        android:text="Google"
-        android:textColor="@color/white"
-        android:textSize="26sp"
+     android:padding="20dp"
+        android:text="Sign in with Google"
+        android:textColor="@color/black"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_facebook"
+        app:layout_constraintEnd_toEndOf="@+id/btn_facebook"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_facebook"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/btn_facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/back_btn"
-        android:backgroundTint="#B12FC7"
 
-        android:drawablePadding="12dp"
+
+        android:background="@drawable/back_facebook"
+        android:drawableLeft="@drawable/facebook"
+        android:drawablePadding="10dp"
+
         android:gravity="center_vertical"
-        android:letterSpacing=".1"
-        android:paddingStart="20dp"
+android:paddingEnd="18dp"
 
-        android:paddingTop="6dp"
-
-        android:paddingEnd="20dp"
-        android:paddingBottom="8dp"
-        android:text="Facebook"
+        android:padding="5dp"
+        android:text="Sign In With Facebook"
         android:textColor="@color/white"
-        android:textSize="26sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_google"
-        app:layout_constraintVertical_bias="0.507" />
+        tools:layout_editor_absoluteX="33dp"
+       />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_google"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
