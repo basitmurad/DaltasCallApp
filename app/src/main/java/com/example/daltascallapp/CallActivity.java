@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.daltascallapp.Interfaces.InterfaceJava;
+import com.example.daltascallapp.UserModels.DialogeText;
 import com.example.daltascallapp.UserModels.UserClass;
 import com.example.daltascallapp.databinding.ActivityCallBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,16 +30,17 @@ import java.util.UUID;
 public class CallActivity extends AppCompatActivity {
     ActivityCallBinding binding;
     FirebaseAuth firebaseAuth;
-    String userName, createdByy;
+    String userUniqueId = " ", createdByy;
     String userId = "";
-    String uniqueId ="";
-    String friendName ="";
+    String uniqueId = "";
+    String friendName = "";
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     boolean isPeerConnected = false;
     boolean isAudio = true;
     boolean isVideo = true;
     boolean pageExit = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,22 +48,17 @@ public class CallActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
         firebaseAuth = FirebaseAuth.getInstance();
 
-        getSupportActionBar().setTitle("Daltas");
+
         userId = firebaseAuth.getUid();
 
-        userName = getIntent().getStringExtra("username");
+        userUniqueId = getIntent().getStringExtra("username");
         String incoming = getIntent().getStringExtra("incoming");
         createdByy = getIntent().getStringExtra("createdBy");
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-
-
-
-
-
+        databaseReference = firebaseDatabase.getReference("users");
 
 
 //        friendName = "";
@@ -69,7 +66,7 @@ public class CallActivity extends AppCompatActivity {
 //        if (incoming.equalsIgnoreCase(friendName));
 //        { friendName = incoming;
 //        }
-            friendName = incoming;
+        friendName = incoming;
 
         SetUpWebView();
 
@@ -114,16 +111,16 @@ public class CallActivity extends AppCompatActivity {
             @Override
             public void onPermissionRequest(PermissionRequest request) {
 
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP ) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     request.grant(request.getResources());
                 }
 
             }
         });
         binding.webview.getSettings().setJavaScriptEnabled(true);
- binding.webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        binding.webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
         binding.webview.getSettings().getDomStorageEnabled();
-        binding.webview.addJavascriptInterface(new InterfaceJava(CallActivity.this),"Android");
+        binding.webview.addJavascriptInterface(new InterfaceJava(CallActivity.this), "Android");
 
 
         LoadVideoCall();
@@ -134,17 +131,16 @@ public class CallActivity extends AppCompatActivity {
     public void LoadVideoCall() {
 
 
-        String filepath = "file:android_asset/call.html";
+//        String filepath = "file:android_asset/call.html";
+        binding.webview.loadUrl("file:///android_asset/call.html");
 
-//        binding.webview.loadUrl("file:///android_asset/call.html");
-        binding.webview.loadUrl(filepath);
 
         binding.webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
 
-                    //initialize peers
+                //initialize peers
                 InitializePeer();
             }
         });
@@ -158,17 +154,17 @@ public class CallActivity extends AppCompatActivity {
         if (pageExit)
             return;
 
-        if (createdByy.equalsIgnoreCase(userName)) {
-            databaseReference.child(userName).child("connectionId").setValue(uniqueId);
-            databaseReference.child(userName).child("isAvailable").setValue(true);
+        if (createdByy.equalsIgnoreCase(userUniqueId)) {
+            databaseReference.child(userUniqueId).child("connectionId").setValue(uniqueId);
+            databaseReference.child(userUniqueId).child("isAvailable").setValue(true);
 
 //            binding.loadingAnimation.setVisibility(View.GONE);
             binding.controlLayout.setVisibility(View.VISIBLE);
 
 
-          FirebaseDatabase.getInstance().getReference("users")
+            FirebaseDatabase.getInstance().getReference("users")
                     .child(friendName)
-                  .child("connectionId")
+                    .child("connectionId")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -177,7 +173,7 @@ public class CallActivity extends AppCompatActivity {
                                     .load(userClass.getProfile())
                                     .into(binding.userImage);
                             binding.userName.setText(userClass.getName());
-                            binding.userLocation.setText(userClass.getCity());
+
 
                         }
 
@@ -204,7 +200,7 @@ public class CallActivity extends AppCompatActivity {
                                             .load(userClass.getProfile())
                                             .into(binding.userImage);
                                     binding.userName.setText(userClass.getName());
-                                    binding.userLocation.setText(userClass.getCity());
+
 
                                 }
 
@@ -214,7 +210,7 @@ public class CallActivity extends AppCompatActivity {
                                 }
                             });
 
-                   FirebaseDatabase.getInstance().getReference().child("users")
+                    FirebaseDatabase.getInstance().getReference().child("users")
                             .child(friendName).child("connectionsID")
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -226,7 +222,7 @@ public class CallActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                public void onCancelled( DatabaseError error) {
+                                public void onCancelled(DatabaseError error) {
 
                                 }
                             });
@@ -293,12 +289,22 @@ public class CallActivity extends AppCompatActivity {
         isPeerConnected = true;
     }
 
-    String getUniqueId(){
+    String getUniqueId() {
         return UUID.randomUUID().toString();
     }
 
     public void ButtonReport(View view) {
 
+        OpneDialoge();
 
+
+    }
+
+    private void OpneDialoge() {
+
+        DialogeText dialogeText = new DialogeText();
+        dialogeText.show(
+                getSupportFragmentManager(), "Report"
+        );
     }
 }

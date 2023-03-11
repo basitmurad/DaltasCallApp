@@ -40,7 +40,7 @@ FirebaseDatabase firebaseDatabase;
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();

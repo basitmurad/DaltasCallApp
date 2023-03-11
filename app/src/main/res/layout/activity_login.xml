@@ -5,13 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-android:background="@drawable/back_dashbooard"
+android:background="@drawable/new_bg"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginActivity">
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
 
-<!--    <com.facebook.login.widget.LoginButton-->
+    <!--    <com.facebook.login.widget.LoginButton-->
 <!--        android:id="@+id/login_button"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
@@ -30,7 +37,7 @@ android:background="@drawable/back_dashbooard"
         android:text="Daltas"
 
         android:layout_marginBottom="60dp"
-        android:textColor="#E0DDE0"
+        android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

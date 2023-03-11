@@ -1,5 +1,6 @@
 package com.example.daltascallapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -35,8 +36,9 @@ public class ConnectingActivity extends AppCompatActivity {
         FirebaseDatabase database;
         DatabaseReference databaseReference;
         boolean isOkay = false;
-    String username;
+    String userUniqueId;
 
+        @SuppressLint("SuspiciousIndentation")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -45,21 +47,21 @@ public class ConnectingActivity extends AppCompatActivity {
 
             auth = FirebaseAuth.getInstance();
             database = FirebaseDatabase.getInstance();
-            getSupportActionBar().hide();
+
             databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
             String profile = getIntent().getStringExtra("profile");
             Glide.with(this)
                     .load(profile)
                     .into(binding.imagesview);
 
-      username = auth.getUid();
+            userUniqueId = auth.getUid();
 
          new CountDownTimer(10000,1000)
          {
 
              @Override
              public void onTick(long millisUntilFinished) {
-                 binding.timerr.setText("__"+millisUntilFinished/1000+"__");
+                 binding.timerr.setText("_"+millisUntilFinished/1000+"_");
              }
 
              @Override
@@ -84,7 +86,7 @@ public class ConnectingActivity extends AppCompatActivity {
                                             .child("users")
                                             .child(childSnap.getKey())
                                             .child("incoming")
-                                            .setValue(username);
+                                            .setValue(userUniqueId);
                                     database.getReference()
                                             .child("users")
                                             .child(childSnap.getKey())
@@ -94,7 +96,7 @@ public class ConnectingActivity extends AppCompatActivity {
                                     String incoming = childSnap.child("incoming").getValue(String.class);
                                     String createdBy = childSnap.child("createdBy").getValue(String.class);
                                     boolean isAvailable = childSnap.child("isAvailable").getValue(Boolean.class);
-                                    intent.putExtra("username", username);
+                                    intent.putExtra("userUniqueId", userUniqueId);
                                     intent.putExtra("incoming", incoming);
                                     intent.putExtra("createdBy", createdBy);
                                     intent.putExtra("isAvailable", isAvailable);
@@ -105,20 +107,20 @@ public class ConnectingActivity extends AppCompatActivity {
                                 // Not Available
 
                                 HashMap<String, Object> room = new HashMap<>();
-                                room.put("incoming", username);
-                                room.put("createdBy", username);
+                                room.put("incoming", userUniqueId);
+                                room.put("createdBy", userUniqueId);
                                 room.put("isAvailable", true);
                                 room.put("status", 0);
 
                                 database.getReference()
                                         .child("users")
-                                        .child(username)
+                                        .child(userUniqueId)
                                         .setValue(room).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
                                                 database.getReference()
                                                         .child("users")
-                                                        .child(username).addValueEventListener(new ValueEventListener() {
+                                                        .child(userUniqueId).addValueEventListener(new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                                                 if(snapshot.child("status").exists()) {
@@ -132,7 +134,7 @@ public class ConnectingActivity extends AppCompatActivity {
                                                                         String incoming = snapshot.child("incoming").getValue(String.class);
                                                                         String createdBy = snapshot.child("createdBy").getValue(String.class);
                                                                         boolean isAvailable = snapshot.child("isAvailable").getValue(Boolean.class);
-                                                                        intent.putExtra("username", username);
+                                                                        intent.putExtra("userUniqueId", userUniqueId);
                                                                         intent.putExtra("incoming", incoming);
                                                                         intent.putExtra("createdBy", createdBy);
                                                                         intent.putExtra("isAvailable", isAvailable);
@@ -167,6 +169,6 @@ public class ConnectingActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        databaseReference.child(username).setValue(null);
+        databaseReference.child(userUniqueId).setValue(null);
     }
 }

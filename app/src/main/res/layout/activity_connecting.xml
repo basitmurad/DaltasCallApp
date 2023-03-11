@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_dashb"
+    android:background="@drawable/new_bg"
     tools:context=".ConnectingActivity">
 
     <TextView
@@ -14,23 +14,41 @@
         android:layout_marginTop="32dp"
         android:padding="5dp"
         android:text="5"
-        android:textColor="@color/black"
+        android:textColor="#F66496"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView3"
-        app:layout_constraintEnd_toEndOf="@+id/imagesview"
-        app:layout_constraintStart_toStartOf="@+id/imagesview"
+        app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView3"
+        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView3"
         app:layout_constraintTop_toBottomOf="@+id/imagesview" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginBottom="24dp"
         android:fontFamily="@font/roboto"
-        android:text="Finding Your "
+        android:text="Daltas Is A Free Online Video Chat App\n That Lets You Easily Chats With Your Friend"
+        android:textAlignment="center"
 
-        android:textColor="@color/black"
+
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView3"
+        app:layout_constraintVertical_bias="0.507"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/aclonica"
+
+        android:letterSpacing=".1"
+        android:text="Finding Your "
+        android:textColor="#F2EFF3"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/lottieAnimationView3"
@@ -42,10 +60,11 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
 
+        android:letterSpacing="0.1"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/aclonica"
         android:text="Beautiful Matches "
-android:textColor="@color/black"
+android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/lottieAnimationView3"
@@ -69,7 +88,7 @@ android:textColor="@color/black"
         app:layout_constraintVertical_bias="0.497"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/finding" />
+        app:lottie_rawRes="@raw/radr2" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imagesview"

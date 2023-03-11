@@ -58,7 +58,9 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
 
 
-    implementation 'com.facebook.android:facebook-android-sdk:16.0.0'
+
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
 
 
 

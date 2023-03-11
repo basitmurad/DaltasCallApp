@@ -1,25 +1,16 @@
 package com.example.daltascallapp.UserModels;
 
 public class UserClass {
-    private String name,profile,city,uniqueID;
+    private String name,profile,uniqueID;
 
     public UserClass() {
     }
 
-    public UserClass(String name, String profile, String city, String uniqueID) {
+    public UserClass(String name, String profile, String uniqueID) {
         this.name = name;
         this.profile = profile;
-        this.city = city;
         this.uniqueID = uniqueID;
     }
-
-    public UserClass(String name, String city, String uniqueID) {
-        this.name = name;
-
-        this.city = city;
-        this.uniqueID = uniqueID;
-    }
-
 
     public String getUniqueID() {
         return uniqueID;
@@ -45,11 +36,4 @@ public class UserClass {
         this.profile = profile;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 }
