@@ -44,7 +44,10 @@ public class LoginActivity extends AppCompatActivity {
 
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
-    int requestCode1 = 101,fbRequestCode =1011;
+    int requestCode1 = 1012;
+    int fbRequestCode = 10121;
+
+
     FirebaseAuth mAuth;
 
     ActivityLoginBinding binding;
@@ -69,10 +72,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-
-
-
-
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -101,9 +100,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
-
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
@@ -124,8 +120,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
     private void AskPermission() {
@@ -154,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == requestCode1) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
@@ -165,10 +160,12 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("UserException", e.getLocalizedMessage());
             }
-        } else if (requestCode == fbRequestCode&&data!=null) {
+        }
+
+        else if (requestCode == fbRequestCode && data != null) {
             mCallbackManager = CallbackManager.Factory.create();
 
-            binding.loginButton.setReadPermissions("email","profiles");
+            binding.loginButton.setReadPermissions("email", "profiles");
             binding.loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
 
 
@@ -185,8 +182,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(FacebookException error) {
-                    Log.d("FacebookError",error.getLocalizedMessage());
-                    Toast.makeText(LoginActivity.this, ""+error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("FacebookError", error.getLocalizedMessage());
+                    Toast.makeText(LoginActivity.this, "" + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -204,18 +201,28 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                             firebaseUser = mAuth.getCurrentUser();
+                            firebaseUser = mAuth.getCurrentUser();
 
 
+                            UserClass userClass = new UserClass(firebaseUser.getDisplayName(), firebaseUser.getUid(), firebaseUser.getPhotoUrl().toString());
 
-                            UserClass userClass = new UserClass(firebaseUser.getDisplayName(),firebaseUser.getUid(),firebaseUser.getPhotoUrl().toString());
-                            Toast.makeText(LoginActivity.this, "Login suuccessfull", Toast.LENGTH_SHORT).show();
+                            firebaseDatabase.getReference().child("profiles")
+                                    .child(firebaseUser.getUid()).setValue(userClass)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+
+
+                                                startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                                                finishAffinity();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
                             Log.d("Login", String.valueOf(task.getException()));
-                            finish();
-
-
-
-
 
 
                         } else {
@@ -235,8 +242,6 @@ public class LoginActivity extends AppCompatActivity {
     public void authWithGoogle(String idToken) {
 
         GoogleAuthCredential googleAuthCredential = (GoogleAuthCredential) GoogleAuthProvider.getCredential(idToken, null);
-
-
         mAuth.signInWithCredential(googleAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -256,7 +261,7 @@ public class LoginActivity extends AppCompatActivity {
                                         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                                         finishAffinity();
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
